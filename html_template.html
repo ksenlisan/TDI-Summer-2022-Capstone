@@ -1,0 +1,14 @@
+<body>
+    <img src="https://github.com/ksenlisan/TDI-Summer-2022-Capstone/blob/14411cdacac94d3d4b8a4882efbb9c7b65014021/SafeRoute%20intro.png">
+    <br>
+    <form action="Enter Origin" method="post">
+        {% for message in get_flashed_messages() %}
+            <p>{{message}}</p>
+        {% endfor %}
+        <br>
+        <input type="text" name="name">
+        <br>
+        <input type="submit" value="Some Bullshit">
+
+    </form>
+</body>
