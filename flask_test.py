@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash
 import folium
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='TDI-Summer-2022-Capstone')
 app.secret_key = b'cjgfkgeer747^^&%*R'
 
 @app.route("/")
