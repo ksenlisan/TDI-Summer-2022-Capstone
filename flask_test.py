@@ -11,7 +11,7 @@ def home():
 
 @app.route("/main")
 def index():
-    flash("Say something")
+    flash("Enter Origin")
     return render_template("html_template.html") 
 
 if __name__ == "__main__":
