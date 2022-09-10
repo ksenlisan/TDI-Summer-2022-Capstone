@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 from geopy.geocoders import Nominatim
 import folium
+from folium import plugins
+import pickle
 
 app = Flask(__name__)
 app.secret_key = b'cjgfkgeer747^^&%*R'
@@ -15,7 +17,12 @@ def home():
 
 @app.route("/show_map")
 def show_map():
+    with open ('crimes_data', 'rb') as fp:
+        crimes = pickle.load(fp)
+        locations = [x[::-1] for x in crimes]
     map = folium.Map(location=[34.09,-118.36], zoom_start=14, width=750, height=500)
+    cluster = plugins.MarkerCluster(locations=locations)  
+    map.add_child(cluster)
     return map._repr_html_()
 
 @app.route('/form', methods = ['POST', 'GET'])
