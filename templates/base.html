@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title> {% block title %} {% endblock %} </title>
+      <style>
+          body {
+              text-align: center;
+          }
+          img {
+              width: 1000px;
+              height: 350px;
+              object-fit: cover;
+          }
+      </style>
+  </head>
+
+  <body>        
+    <img src="https://github.com/ksenlisan/TDI-Summer-2022-Capstone/blob/main/SafeRoute%20logo.png?raw=true" alt="Image not found">
+    {% block content %}{% endblock %}
+  </body>
+
+</html>
