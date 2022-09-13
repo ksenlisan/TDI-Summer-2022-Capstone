@@ -8,8 +8,18 @@ The starting dataset contains many categories of crimes and includes information
 to 2022 and retreived data for West Hollywood location. Some of the categories were excluded from analysis such as: fraud, vehicle laws, gambling etc. For the
 remaining data we can see what kind of crimes are most abundant. Below are plotted top 10 crime occurances in the selected time period.
 </p>
-<img src = "../images/crime_category_count.svg" alt="Image failed to load :("/>
+<img src = "https://raw.githubusercontent.com/ksenlisan/TDI-Summer-2022-Capstone/main/images/crime_category_count.png" alt="Image was not found :("/>
 
+<p><br>I used<a href=https://python-visualization.github.io/folium/> Folium</a> library to visualize crime locations. </p>
 
 <iframe src="{{ url_for('show_map') }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+
+<p><br>In order to create navigation paths I first set up street graph using a combination of 
+    <a href="https://osmnx.readthedocs.io/en/stable/"> Osmnx </a> and 
+    <a href="https://networkx.org/">NetworkX</a> libraries that work with 
+    <a href="https://www.openstreetmap.org">OpenStreetMap</a> data. Each street would have parameters such as 
+start and end node locations and length. I was able to draw a virtual "sleeve" centered around each street (set to 100 meters total width) using 
+    <a href="https://pypi.org/project/Shapely/">Shapely</a>'s toolbox. 
+Then I computed all the crimes within the "sleeve" area to add those as weight parameters to my graph. In the current version the algorithm uses crimes as a sole weighting
+ factor, thus finding a path with the least number of historic crime encounters.</p>
 {% endblock %}
