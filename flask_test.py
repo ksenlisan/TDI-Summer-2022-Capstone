@@ -72,7 +72,8 @@ def saferoute(a, b):
     
 
     G_walk.add_weighted_edges_from(edges_weights_crime, 'weight')
-    #maybe save G-walk as file?
+    orig_node = ox.distance.nearest_nodes(G_walk, from_location.longitude, from_location.latitude)
+    dest_node = ox.distance.nearest_nodes(G_walk, to_location.longitude, to_location.latitude)
 
 
 
