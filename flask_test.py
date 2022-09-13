@@ -47,7 +47,19 @@ def saferoute(a, b):
     from_location = geolocator.geocode(a)
     to_location = geolocator.geocode(b)
     if from_location == None or to_location == None:
-        return 'Please enter valid address' #will need to add html form with error mssg
+        return 'The address you entered is not valid.' #will need to add html form with error mssg
+
+    #define WeHo location graph
+    G_walk = ox.graph_from_place('West Hollywood, Los Angeles County, California, United States',
+                             network_type='walk')
+                             
+    #find nearest node for target addresses and distance between entered point and node
+    orig_node, orig_dist = ox.distance.nearest_nodes(G_walk, from_location.longitude, from_location.latitude, return_dist=True)
+    dest_node, dest_dist = ox.distance.nearest_nodes(G_walk, to_location.longitude, to_location.latitude, return_dist=True)
+
+    #node check if within WeHo, 
+    if orig_dist > 100 or dest_dist > 100:
+        return 'The address you entered is not in West Hollywood.'
 
     map = folium.Map(location=[34.09,-118.36], zoom_start=14, width=750, height=500)
 
@@ -55,15 +67,11 @@ def saferoute(a, b):
     with open('edges_weights_crime', 'rb') as fp:
         edges_weights_crime = pickle.load(fp)
 
-    G_walk = ox.graph_from_place('West Hollywood, Los Angeles County, California, United States',
-                             network_type='walk')
+    
 
     G_walk.add_weighted_edges_from(edges_weights_crime, 'weight')
     #maybe save G-walk as file?
 
-    #create graph with weighted edges
-    orig_node = ox.distance.nearest_nodes(G_walk, from_location.longitude, from_location.latitude)
-    dest_node = ox.distance.nearest_nodes(G_walk, to_location.longitude, to_location.latitude)
 
 
     route2 = nx.shortest_path(G_walk, #returns a sequence of nodes
