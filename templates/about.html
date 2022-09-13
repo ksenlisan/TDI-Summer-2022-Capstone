@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {% block title %} About page {% endblock %}
 {% block content %}
+<p>SafeRoute relies on publically available crime data, in this case from 
+    <a href="https://lasd.org/transparency/part1and2crimedata/"> Los Angeles Sheriff's department website </a>.
+    <br>
+The starting dataset contains many categories of crimes and includes information about their geographic location with high accuracy. I combined datasets from year 2018
+to 2022 and retreived data for West Hollywood location. Some of the categories were excluded from analysis such as: fraud, vehicle laws, gambling etc. For the
+remaining data we can see what kind of crimes are most abundant. Below are plotted top 10 crime occurances in the selected time period.
+</p>
+<img src = "../images/crime_category_count.svg" alt="Image failed to load :("/>
+
+
 <iframe src="{{ url_for('show_map') }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 {% endblock %}

@@ -31,6 +31,7 @@ def show_map():
     map.add_child(cluster)
     return map._repr_html_()
 
+#get user input
 @app.route('/form', methods = ['POST', 'GET'])
 def form():
     if request.method == 'GET':
@@ -43,6 +44,7 @@ def form():
 
 @app.route('/saferoute?<a>&<b>')
 def saferoute(a, b):
+    #use a nominatim service to match input with a valid address/location
     geolocator = Nominatim(user_agent="decomposition.of.life@gmail.com")
     from_location = geolocator.geocode(a)
     to_location = geolocator.geocode(b)
