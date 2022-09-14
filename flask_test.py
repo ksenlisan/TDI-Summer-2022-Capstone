@@ -81,14 +81,29 @@ def saferoute(a, b):
                             orig_node,
                             dest_node,
                             weight='weight')
+
     #for some reason G_walk needs to be created again otherwise KeyError 'length'                        
     G_walk = ox.graph_from_place('West Hollywood, Los Angeles County, California, United States',
                              network_type='walk')
     #add route to map
+    total_length = f'Total length of this route: {int(sum(ox.utils_graph.get_route_edge_attributes(G_walk, route2, attribute="length")))} meters'
+
     ox.plot_route_folium(G_walk, route2, map)
+
+    title_html = '''
+             <h3 align="center" style="font-size:16px"><b>{}</b></h3>
+             '''.format(total_length)   
+
+    map.get_root().html.add_child(folium.Element(title_html))     
+
+    folium.Marker(location=[from_location.latitude, from_location.longitude],popup = from_location,
+                icon= folium.Icon(color='green')).add_to(map)
+    folium.Marker(location=[to_location.latitude, to_location.longitude],popup = to_location,
+                icon= folium.Icon(color='blue')).add_to(map)
     
 
-    return (map._repr_html_())
+#    return (map._repr_html_())
+    return render_template('result.html', map=map._repr_html_())
 #    return f'Starting coordinates: {from_location} long/lat: {from_location.longitude}, {from_location.latitude} {new_line} Destination coordinates: {to_location} long/lat {to_location.longitude}, {to_location.latitude}'
 
 
