@@ -1,6 +1,8 @@
 # TDI-Summer-2022-Capstone
 *Ksenia Lisova*
 
+Deployed on Heroku https://saferoute-tdi-2022.herokuapp.com/
+
 # SafeRoute (West Hollywood): A navigation algorithm for improved safety
 SafeRoute algorithms prioritizes street safety instead of distance to come up with a route which historically had the least amount of crime occurrences. The proof of concept SafeRoute project is set in West Hollywood area of Los Angeles, but can be expanded to any other geographical location where crime data is accessible.
 
